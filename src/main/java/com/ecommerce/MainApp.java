@@ -21,6 +21,7 @@ public class MainApp {
         while(true) {
             System.out.println("---------------------Ecommerce Application---------------------");
             System.out.println("1. Create new Product");
+            System.out.println("2. Get Product by Id");
             System.out.println("0. Exit");
             System.out.println("---------------------------------------------------------------");
             System.out.println("Enter your choice: ");
@@ -69,6 +70,18 @@ public class MainApp {
                     }
 
                 }
+                case 2 -> {
+                    System.out.println("---------------------Get Product by Id---------------------");
+                    System.out.println("Enter productId :");
+                    int productId = in.nextInt();
+                    try{
+                        Product product = productService.getProductById(productId);
+                        System.out.println(product);
+                    } catch (Exception e) {
+                        System.out.println("Unable to get product by id : "+e.getMessage());
+                    }
+                }
+
             }
         }
 

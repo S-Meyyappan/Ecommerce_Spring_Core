@@ -40,4 +40,9 @@ public class ProductService {
     public void addProduct(Product product) {
         productRepository.addProduct(product);
     }
+
+    public Product getProductById(int productId) {
+        return productRepository.getProductById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+    }
 }
