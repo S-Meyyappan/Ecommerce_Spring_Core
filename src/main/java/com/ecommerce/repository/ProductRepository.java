@@ -1,15 +1,18 @@
 package com.ecommerce.repository;
 
+import com.ecommerce.dto.VendorProductCountDto;
 import com.ecommerce.model.Category;
 import com.ecommerce.model.Product;
 import com.ecommerce.utility.CategoryUtility;
 import com.ecommerce.model.Vendor;
 import com.ecommerce.utility.ProductUtility;
+import com.ecommerce.utility.VendorProductCountUtility;
 import com.ecommerce.utility.VendorUtility;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,12 +22,14 @@ public class ProductRepository {
     private final CategoryUtility categoryUtility;
     private final VendorUtility vendorUtility;
     private final ProductUtility productUtility;
+    private final VendorProductCountUtility vendorProductCountUtility;
 
-    public ProductRepository(JdbcTemplate jdbcTemplate, CategoryUtility productUtility, VendorUtility vendorUtility, ProductUtility productUtility1) {
+    public ProductRepository(JdbcTemplate jdbcTemplate, CategoryUtility productUtility, VendorUtility vendorUtility, ProductUtility productUtility1, VendorProductCountUtility vendorProductCountUtility) {
         this.jdbcTemplate = jdbcTemplate;
         this.categoryUtility = productUtility;
         this.vendorUtility = vendorUtility;
         this.productUtility = productUtility1;
+        this.vendorProductCountUtility = vendorProductCountUtility;
     }
 
     public Optional<Category> getCategoryByName(String categoryName) {
@@ -77,5 +82,17 @@ public class ProductRepository {
         String sql = "UPDATE product SET stockQuantity = ? WHERE id = ?";
         Object[] values = new Object[]{product.getStockQuantity(), product.getId()};
         jdbcTemplate.update(sql, values);
+    }
+
+    public List<VendorProductCountDto> getProductCountByVendors() {
+        String sql = """
+                SELECT
+                    v.name AS vendor_name, count(v.name) AS product_count
+                    FROM product p
+                    JOIN vendor v
+                    ON v.id = p.vendor_id
+                    GROUP BY(v.name)
+                """;
+        return jdbcTemplate.query(sql, vendorProductCountUtility );
     }
 }

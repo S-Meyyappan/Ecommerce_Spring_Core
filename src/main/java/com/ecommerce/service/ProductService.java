@@ -1,10 +1,13 @@
 package com.ecommerce.service;
 
+import com.ecommerce.dto.VendorProductCountDto;
 import com.ecommerce.model.Category;
 import com.ecommerce.model.Product;
 import com.ecommerce.model.Vendor;
 import com.ecommerce.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -50,5 +53,9 @@ public class ProductService {
         Product product = getProductById(productId);
         product.setStockQuantity(stockQuantity);
         productRepository.updateStockQuantity(product);
+    }
+
+    public List<VendorProductCountDto> getProductCountByVendors() {
+        return productRepository.getProductCountByVendors();
     }
 }

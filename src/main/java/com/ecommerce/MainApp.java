@@ -1,5 +1,6 @@
 package com.ecommerce;
 
+import com.ecommerce.dto.VendorProductCountDto;
 import com.ecommerce.model.Category;
 import com.ecommerce.model.Product;
 import com.ecommerce.model.Vendor;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainApp {
@@ -23,6 +25,7 @@ public class MainApp {
             System.out.println("1. Create new Product");
             System.out.println("2. Get Product by Id");
             System.out.println("3. Update StockQuantity");
+            System.out.println("4. Get Product Count by Vendors");
             System.out.println("0. Exit");
             System.out.println("---------------------------------------------------------------");
             System.out.println("Enter your choice: ");
@@ -95,9 +98,16 @@ public class MainApp {
                         System.out.println("Unable to update stock quantity : "+e.getMessage());
                     }
                 }
+                case 4 -> {
+                    System.out.println("---------------------Get Product Count by Vendors---------------------");
+                    System.out.println("Vendorname\tProductCount");
+                    List<VendorProductCountDto> list = productService.getProductCountByVendors();
+                    list.forEach((dto) -> {
+                        System.out.println(dto.vendorName() + "\t" + dto.productCount());
+                    });
+                }
             }
         }
-
         context.close();
     }
 }
