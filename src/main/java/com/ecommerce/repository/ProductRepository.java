@@ -72,4 +72,10 @@ public class ProductRepository {
         return jdbcTemplate.query(sql, productUtility, productId)
                 .stream().findFirst();
     }
+
+    public void updateStockQuantity(Product product) {
+        String sql = "UPDATE product SET stockQuantity = ? WHERE id = ?";
+        Object[] values = new Object[]{product.getStockQuantity(), product.getId()};
+        jdbcTemplate.update(sql, values);
+    }
 }

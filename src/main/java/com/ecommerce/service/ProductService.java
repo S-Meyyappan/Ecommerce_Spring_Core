@@ -45,4 +45,10 @@ public class ProductService {
         return productRepository.getProductById(productId)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
     }
+
+    public void updateStockQuantity(int productId, int stockQuantity) {
+        Product product = getProductById(productId);
+        product.setStockQuantity(stockQuantity);
+        productRepository.updateStockQuantity(product);
+    }
 }

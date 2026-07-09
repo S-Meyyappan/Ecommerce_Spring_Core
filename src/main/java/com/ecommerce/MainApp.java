@@ -22,6 +22,7 @@ public class MainApp {
             System.out.println("---------------------Ecommerce Application---------------------");
             System.out.println("1. Create new Product");
             System.out.println("2. Get Product by Id");
+            System.out.println("3. Update StockQuantity");
             System.out.println("0. Exit");
             System.out.println("---------------------------------------------------------------");
             System.out.println("Enter your choice: ");
@@ -81,7 +82,19 @@ public class MainApp {
                         System.out.println("Unable to get product by id : "+e.getMessage());
                     }
                 }
-
+                case 3 -> {
+                    System.out.println("---------------------Update Product Stock Quantity---------------------");
+                    System.out.println("Enter productId :");
+                    int productId = in.nextInt();
+                    System.out.println("Enter new stock count :");
+                    int stockQty = in.nextInt();
+                    try{
+                        productService.updateStockQuantity(productId,stockQty);
+                        System.out.println("Stock quantity updated successfully");
+                    } catch (Exception e) {
+                        System.out.println("Unable to update stock quantity : "+e.getMessage());
+                    }
+                }
             }
         }
 
