@@ -47,4 +47,7 @@ public class ProductService {
         return productRepository.getProductCountByVendors();
     }
 
+    public List<Product> getAllProducts() {
+        return productRepository.getAllProducts();
+    }
 }

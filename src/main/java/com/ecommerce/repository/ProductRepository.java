@@ -83,4 +83,18 @@ public class ProductRepository {
                 """;
         return jdbcTemplate.query(sql, vendorProductCountRowMapper);
     }
+
+    public List<Product> getAllProducts() {
+        String sql = """
+                SELECT 
+                    p.id AS product_id, p.name AS product_name,price,stockQuantity,
+                    c.id AS category_id, c.name AS category_name,
+                    v.id AS vendor_id, v.name AS vendor_name
+                FROM category c
+                JOIN product p ON c.id = p.category_id
+                JOIN vendor v ON v.id = p.vendor_id
+                ORDER by p.id
+                """;
+        return jdbcTemplate.query(sql,productRowMapper);
+    }
 }

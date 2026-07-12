@@ -26,6 +26,7 @@ public class MainApp {
             System.out.println("2. Get Product by Id");
             System.out.println("3. Update StockQuantity");
             System.out.println("4. Get Product Count by Vendors");
+            System.out.println("5. Get All Products");
             System.out.println("0. Exit");
             System.out.println("---------------------------------------------------------------");
             System.out.println("Enter your choice: ");
@@ -105,6 +106,11 @@ public class MainApp {
                     list.forEach((dto) -> {
                         System.out.println(dto.vendorName() + "\t" + dto.productCount());
                     });
+                }
+                case 5 -> {
+                    System.out.println("---------------------Get All Products---------------------");
+                    List<Product> list = productService.getAllProducts();
+                    list.forEach(System.out::println);
                 }
             }
         }
