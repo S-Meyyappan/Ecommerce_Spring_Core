@@ -38,25 +38,25 @@ public class MainApp {
             switch (choice){
                 case 1 -> {
                     System.out.println("---------------------Add new Product---------------------");
+                    in.nextLine();
                     System.out.println("Enter Product Name: ");
-                    String name = in.next();
+                    String name = in.nextLine();
                     System.out.println("Enter Product Price: ");
                     BigDecimal price = in.nextBigDecimal();
                     System.out.println("Enter Product Stock Quantity: ");
                     int stockQuantity = in.nextInt();
-                    in.nextLine();
-                    System.out.println("Enter Category Name");
-                    String categoryName = in.nextLine();
-                    System.out.println("Enter Vendor Name: ");
-                    String vendorName = in.nextLine();
+                    System.out.println("Enter Category Id: ");
+                    int categoryId = in.nextInt();
+                    System.out.println("Enter Vendor Id: ");
+                    int vendorId = in.nextInt();
 
                     Category category = null;
                     Vendor vendor = null;
                     try {
-                        category = productService.getOrCreateCategoryByName(categoryName);
-                        vendor = productService.getOrCreateVendorByName(vendorName);
+                        category = productService.getCategoryById(categoryId);
+                        vendor = productService.getVendorById(vendorId);
                     } catch (Exception e) {
-                        System.out.println("Category or Vendor not found"+e.getMessage());
+                        System.out.println("Unable to add product : "+e.getMessage());
                     }
 
                     Product product = new Product();

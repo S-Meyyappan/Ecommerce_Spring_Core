@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
-public class CategoryUtility implements RowMapper<Category> {
+public class CategoryRowMapper implements RowMapper<Category> {
 
     @Override
     public Category mapRow(ResultSet rs, int rowNum) throws SQLException {

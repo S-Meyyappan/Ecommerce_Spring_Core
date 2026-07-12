@@ -18,26 +18,14 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Category getOrCreateCategoryByName(String categoryName) {
-        if(productRepository.getCategoryByName(categoryName).isPresent()) {
-            System.out.println("Category found");
-            return productRepository.getCategoryByName(categoryName).get();
-        } else {
-            System.out.println("Category not found");
-            System.out.println("Creating new Category....");
-            return productRepository.createCategory(categoryName);
-        }
+    public Category getCategoryById(int categoryId) {
+        return productRepository.getCategoryById(categoryId)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
     }
 
-    public Vendor getOrCreateVendorByName(String vendorName) {
-        if(productRepository.getVendorByName(vendorName).isPresent()) {
-            System.out.println("Vendor found");
-            return productRepository.getVendorByName(vendorName).get();
-        } else {
-            System.out.println("Vendor not found");
-            System.out.println("Creating new Vendor....");
-            return productRepository.createVendor(vendorName);
-        }
+    public Vendor getVendorById(int vendorId) {
+        return productRepository.getVendorById(vendorId)
+                .orElseThrow(() -> new RuntimeException("Vendor not found"));
     }
 
     public void addProduct(Product product) {
@@ -58,4 +46,5 @@ public class ProductService {
     public List<VendorProductCountDto> getProductCountByVendors() {
         return productRepository.getProductCountByVendors();
     }
+
 }

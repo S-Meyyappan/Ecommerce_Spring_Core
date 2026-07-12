@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
-public class VendorProductCountUtility implements RowMapper<VendorProductCountDto> {
+public class VendorProductCountRowMapper implements RowMapper<VendorProductCountDto> {
 
     @Override
     public VendorProductCountDto mapRow(ResultSet rs, int rowNum) throws SQLException {

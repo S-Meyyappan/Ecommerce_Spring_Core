@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
-public class VendorUtility implements RowMapper<Vendor> {
+public class VendorRowMapper implements RowMapper<Vendor> {
     @Override
     public Vendor mapRow(ResultSet rs, int rowNum) throws SQLException {
         Vendor vendor = new Vendor();
